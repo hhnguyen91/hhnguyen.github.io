@@ -29,9 +29,6 @@
 
         <ul class="nav nav-tabs fixed-top bg-dark navbar-dark" role="navigation">
             <li class="nav-item">
-                <a class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link "  href='AddArtist.html'>Artist</a>
             </li>
             <li class="nav-item">
@@ -43,13 +40,21 @@
           <li class = "nav-item">
             <a class ="nav-link"  href="PaySummary.html">Pay Summary</a>            
           </li>
-            <li class = "nav-item">
-            
-                <div class="position-absolute top-0 end-0">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <div id = "logoutBtn" style="display: none;">
+                <li class = "nav-item" >
+                    <div class="position-absolute top-0 end-0">
+                        <button onclick= "logout()" class="btn btn-outline-danger">Log Out</button>
                     </div>
-             
-                 </li>
+
+                </li>
+            </div>
+            <div id = "loginBtn">
+                <li class = "nav-item" >
+                    <div class="position-absolute top-0 end-0">
+                        <button onclick= "loginPage()" class="btn btn-outline-success">Log In</button>
+                    </div> 
+                </li>
+            </div>
         </ul>
            
             <br>
@@ -143,7 +148,7 @@
                 <input type="email" class="form-control" id="email" placeholder="Email">
               </div> 
                 
-                <button onclick="addClient()" id = "createClientButton" type="button" class="btn btn-primary">Add Client</button>
+                <button type= "submit"onclick="addClient()" id = "createClientButton" type="button" class="btn btn-primary">Add Client</button>
                     </form>      
         </div>
          </div>

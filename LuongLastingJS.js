@@ -379,6 +379,7 @@ function populateArtistListv2() {
 }
 
 function getAllArtist() {
+        changeLoginLogoutBtn()
     database.ref('artists').on('value',
                                 function(AllRecords){
         $("#artistTableBody").empty()
@@ -575,7 +576,7 @@ function deleteArtistBtn() {
 
 
 function getAllClients () {
-        
+        changeLoginLogoutBtn()
     
         database.ref('clients').on('value',
                                 function(AllRecords){
@@ -671,7 +672,7 @@ function deleteClientBtn() {
 }
 
 function getAllResponses () {
-       
+       changeLoginLogoutBtn()
         database.ref('responses').on('value',
                                 function(AllRecords){
         $("#responsesTableBody").empty()
@@ -974,9 +975,19 @@ function editResponseBtn() {
         travelMiles: $("#edit-travelMiles").val(),
         comments: $("#edit-comments").val()
     }
+    resetResponseEditForm()
     database_ref.child('responses/' + response_data.responseID).set(response_data)
     database_ref.child('artists/' + response_data.artist).child('responses/' +response_data.responseID ).set(response_data)
 
+}
+
+function resetResponseEditForm(){
+    $("#eventInfoModal-section").show()
+    $("#NonBrideModal-section").hide()
+    $("#brideModal-section").hide()
+    $("#NonWeddingModal-Section").hide()
+    $("#miscModal-section").hide()
+    
 }
 
 //delete response
@@ -1078,6 +1089,19 @@ function getPaySummary(){
         )
     })
     
+}
+
+function changeLoginLogoutBtn(){
+    firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+            console.log("User is signed in")
+              $("#logoutBtn").show()
+              $("#loginBtn").hide()
+          }
+          else {
+            console.log("No User is signed in")
+          }
+        })
 }
 
 function eventInfoNext() {
@@ -1347,10 +1371,20 @@ function login () {
     //Redirects logged in users to the main page
   auth.onAuthStateChanged(user => {
   if(user) {
-    window.location = 'PaySummary.html'; //After successful login, user will be redirected to home.html
+    window.location = 'PaySummary.html'; //After successful login, user will be redirected to paysummary.html
   }
 });  
     
+}
+
+function logout(){
+    console.log("Logout button pressed")
+    auth.signOut()
+    window.location = 'Login.html'
+} 
+
+function loginPage(){
+    window.location = 'Login.html'
 }
 
 
